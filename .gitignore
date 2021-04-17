@@ -5,3 +5,4 @@
 !Makefile
 !input*.txt
 !.gitignore
+!checkall.bash
