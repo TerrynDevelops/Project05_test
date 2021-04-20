@@ -105,11 +105,11 @@ void Encounter::UseAction(uint32_t attackerUID, uint32_t targetUID, const std::s
         return;
     }
 
-    attacker->UseAction(target, spellName, args);
+    attacker->UseAction(target.get(), spellName, args);
 
     if(!target->IsAlive())
     {
-        attacker->LootAnEntity(target);
+        attacker->LootAnEntity(target.get());
         
         if(!_encounterDictionary.Remove(target->UID()))
         {
