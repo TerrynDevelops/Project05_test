@@ -25,7 +25,7 @@ Encounter::~Encounter()
 //       back of the list.
 void Encounter::AddEntity(Entity *entity)
 {
-    if(!_encounterDictionary.Insert(entity->UID(), entity))
+    if(!_encounterDictionary.Insert(entity->UID(), std::shared_ptr<Entity>(entity)))
     {
         std::cout << "FAILED TO ADD ENTITY: " << entity->UID() << std::endl;
     }
@@ -42,10 +42,8 @@ void Encounter::PrintEntityStatus(uint32_t entityID) const
 {
     if(_encounterDictionary.Contains(entityID))
     {
-        Entity * tmp = _encounterDictionary.At(entityID);
-        tmp->OutputStatus();        
-
-
+        auto tmp = _encounterDictionary.At(entityID);
+        tmp->OutputStatus();
     }
     else
     {
@@ -63,7 +61,7 @@ void Encounter::PrintAllStatuses() const
     Vector<uint32_t> keys = _encounterDictionary.Keys();
     for(int i = 0; i < keys.Count(); i ++)
     {
-        Entity * entity = _encounterDictionary.At(keys.At(i));
+        auto entity = _encounterDictionary.At(keys.At(i));
 
         if(entity != nullptr)
         {
@@ -91,8 +89,8 @@ void Encounter::UseAction(uint32_t attackerUID, uint32_t targetUID, const std::s
     }
 
 
-    Entity *attacker = _encounterDictionary.At(attackerUID);
-    Entity *target = _encounterDictionary.At(targetUID);
+    auto attacker = _encounterDictionary.At(attackerUID);
+    auto target = _encounterDictionary.At(targetUID);
 
 
     if(attacker == nullptr)
@@ -117,7 +115,6 @@ void Encounter::UseAction(uint32_t attackerUID, uint32_t targetUID, const std::s
         {
             std::cout << "REMOVAL FAILED" << std::endl;
         }
-        delete target;
     }
 }
 
