@@ -13,13 +13,6 @@ Encounter::Encounter()
 // SINCE OUR DICTIONARY HOLDS POINTERS
 Encounter::~Encounter()
 {
-    Vector<uint32_t> keys = _encounterDictionary.Keys();
-    for(int i = 0; i < keys.Count(); i ++)
-    {
-        Entity * toDelete = _encounterDictionary.At(keys.At(i));
-        delete toDelete;
-    }
-
 
 }
 

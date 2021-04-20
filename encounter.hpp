@@ -1,6 +1,7 @@
 #ifndef ENCOUNTER_HPP
 #define ENCOUNTER_HPP
 
+#include <memory>
 
 #include "dictionary.hpp"
 #include "vector.hpp"
@@ -31,7 +32,7 @@ public:
 
 private:
 
-    Dictionary<uint32_t, Entity* > _encounterDictionary;
+    Dictionary<uint32_t, std::shared_ptr<Entity> > _encounterDictionary;
 
     // provided
     void PrintBadAccessError(uint32_t uid) const;
